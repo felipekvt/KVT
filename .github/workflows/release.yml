@@ -1,0 +1,60 @@
+name: Publish Windows prototype
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [.github/workflows/release.yml]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-v0.1.0
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out the version being released
+        uses: actions/checkout@v4
+        with:
+          ref: v0.1.0
+          persist-credentials: false
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci
+      - name: Verify gameplay and server
+        run: npm test
+      - name: Build the portable Windows package
+        run: python3 scripts/package_windows.py
+      - name: Record package checksums
+        working-directory: dist
+        run: sha256sum Toca-e-Trilha-Windows-x64.zip Toca-e-Trilha-codigo-fonte.zip > SHA256SUMS.txt
+      - name: Publish the release and downloadable packages
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          cat > release-notes.md <<'NOTES'
+          Toca & Trilha 0.1.0 — protótipo original de plataforma 2D.
+
+          Baixe Toca-e-Trilha-Windows-x64.zip, extraia todo o ZIP e abra Toca-e-Trilha.exe. Escolha um nome e clique em Entrar na trilha.
+
+          A/D ou setas movem; Espaço/W/seta para cima pulam; R reinicia. Pegue o queijo e volte à toca. Ctrl+N abre outra janela para testar multiplayer na mesma sala.
+
+          Windows 10/11 x64. Inclui servidor local próprio, uma fase e arte original. Não precisa instalar Node.js, npm ou Adobe AIR. Não inclui arquivos, arte ou código do Transformice.
+
+          Os testes de física e multiplayer são executados antes do empacotamento. O runtime oficial Electron 44.7.0 é verificado por SHA-256. Os checksums dos ZIPs estão em SHA256SUMS.txt. O executável ainda precisa de teste no Windows; esta montagem ocorre no Linux.
+          NOTES
+          if gh release view v0.1.0 --json url >/dev/null 2>&1; then
+            gh release upload v0.1.0 dist/Toca-e-Trilha-Windows-x64.zip dist/Toca-e-Trilha-codigo-fonte.zip dist/SHA256SUMS.txt --clobber
+          else
+            gh release create v0.1.0 dist/Toca-e-Trilha-Windows-x64.zip dist/Toca-e-Trilha-codigo-fonte.zip dist/SHA256SUMS.txt --verify-tag --title 'Toca & Trilha 0.1.0' --notes-file release-notes.md
+          fi
