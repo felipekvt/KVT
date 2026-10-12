@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#f5f2e9" />
+    <meta name="description" content="Uma pequena aventura em uma grande floresta. Pegue o queijo, encontre o caminho de volta e jogue junto." />
+    <title>Toca &amp; Trilha — Uma pequena grande aventura</title>
+    <link rel="stylesheet" href="/style.css" />
+    <script type="module" src="/client.js"></script>
+  </head>
+  <body>
+    <svg class="icon-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M20 3c-8-.6-16 2.8-16 10a6 6 0 0 0 6 6c7.2 0 10.6-8 10-16Z" fill="currentColor"/><path d="m4 21 11-11" stroke="var(--icon-detail, #f7f5ec)" stroke-width="1.7" stroke-linecap="round"/></symbol>
+      <symbol id="i-cheese" viewBox="0 0 24 24"><path d="m3 9 13-6 5 6v12H3V9Z" fill="currentColor"/><path d="M3 9h18" stroke="var(--icon-detail, #fff8e9)" stroke-width="1.5"/><circle cx="8" cy="14" r="1.7" fill="var(--icon-detail, #fff8e9)"/><circle cx="16" cy="17" r="2.1" fill="var(--icon-detail, #fff8e9)"/></symbol>
+      <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+      <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M3 19v-2a6 6 0 0 1 12 0v2m2-14a3 3 0 0 1 0 6m1 3a5 5 0 0 1 3 5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+      <symbol id="i-volume" viewBox="0 0 24 24"><path d="M4 9h4l5-4v14l-5-4H4V9Zm13-2a7 7 0 0 1 0 10m3-13a11 11 0 0 1 0 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-muted" viewBox="0 0 24 24"><path d="M4 9h4l5-4v14l-5-4H4V9Zm13 0 5 6m0-6-5 6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-reset" viewBox="0 0 24 24"><path d="M4 10a8 8 0 1 1 .7 6M4 4v6h6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="13" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M16 5V3H4v13h1" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-home" viewBox="0 0 24 24"><path d="m3 11 9-8 9 8m-16-1v11h14V10m-10 11v-7h6v7" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 20V4m-6 6 6-6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    </svg>
+
+    <div class="page-shell">
+      <header class="site-header">
+        <a class="brand" href="/" aria-label="Toca e Trilha — início">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 48 48"><path d="M10 31c0-10 6-17 14-17s14 7 14 17v7H10Z" fill="#3c7769"/><path d="M18 38V29a6 6 0 0 1 12 0v9" fill="#f9f5e9"/><path d="M24 15C17 12 16 5 17 3c9 0 14 5 7 12Z" fill="#80a184"/><path d="M24 15c-1-8 5-12 11-11 0 8-4 12-11 11Z" fill="#a3b88b"/><path d="m9 38 30-.1" stroke="#264e44" stroke-width="2.5" stroke-linecap="round"/><circle cx="27" cy="30" r="1" fill="#cc9a64"/></svg>
+          </span>
+          <span class="brand-wordmark">toca <span>&amp;</span> trilha<span class="brand-tagline">UMA PEQUENA GRANDE AVENTURA</span></span>
+        </a>
+        <div class="header-right">
+          <span class="prototype-badge"><span></span> PROTÓTIPO JOGÁVEL</span>
+          <button id="sound-button" class="icon-button" type="button" aria-label="Desativar som" aria-pressed="false" title="Desativar som"><svg class="icon"><use href="#i-volume" /></svg></button>
+        </div>
+      </header>
+
+      <main>
+        <section class="intro" aria-labelledby="page-title">
+          <div>
+            <p class="eyebrow"><svg class="icon"><use href="#i-leaf" /></svg> ENCONTRE O SEU CAMINHO</p>
+            <h1 id="page-title">A floresta fica melhor <em>com você.</em></h1>
+          </div>
+          <p class="intro-note">Um queijo para buscar.<br />Uma toca para chamar de sua.</p>
+        </section>
+
+        <section class="game-frame" aria-label="Jogo Toca e Trilha">
+          <div class="game-toolbar">
+            <div class="room-summary">
+              <span class="room-icon"><svg class="icon"><use href="#i-home" /></svg></span>
+              <div><span class="mini-label">SUA CLAREIRA</span><button id="room-button" class="room-button" type="button" title="Trocar nome ou sala">CLAREIRA <span aria-hidden="true">⌄</span></button></div>
+              <span class="toolbar-divider"></span>
+              <span id="connection-status" class="connection-status" data-status="idle"><span class="status-dot"></span><span id="connection-label">Pronto para explorar</span></span>
+            </div>
+            <div class="round-summary">
+              <span class="cheese-status"><svg class="icon"><use href="#i-cheese" /></svg><span id="cheese-label">Queijo à vista</span></span>
+              <span class="toolbar-divider"></span>
+              <span class="timer" id="round-timer"><svg class="icon"><use href="#i-clock" /></svg><span id="time-label">02:00</span></span>
+            </div>
+          </div>
+
+          <div class="game-viewport" id="game-viewport">
+            <canvas id="game" width="1280" height="720" tabindex="0" aria-label="Mova seu ratinho com A e D ou as setas. Pule com Espaço. Pegue o queijo e volte à toca.">Seu navegador precisa oferecer suporte a Canvas para jogar.</canvas>
+            <div class="world-caption" aria-hidden="true"><span></span> A CLAREIRA DOURADA</div>
+
+            <div id="welcome" class="welcome-layer">
+              <form id="join-form" class="welcome-card">
+                <span class="welcome-leaf" aria-hidden="true"><svg class="icon"><use href="#i-leaf" /></svg></span>
+                <p class="eyebrow">SUA AVENTURA COMEÇA AQUI</p>
+                <h2>Bora explorar?</h2>
+                <p class="welcome-description">Pegue o queijo no alto da trilha<br />e encontre o caminho de volta à toca.</p>
+                <label for="player-name">Seu nome na floresta</label>
+                <input id="player-name" name="name" autocomplete="nickname" minlength="1" maxlength="18" placeholder="Ex.: Pipoca" required />
+                <div class="room-field">
+                  <label for="room-name">Sala</label>
+                  <span class="field-note">Mesma sala, mesma aventura.</span>
+                  <div class="input-with-icon"><svg class="icon"><use href="#i-users" /></svg><input id="room-name" name="room" autocomplete="off" minlength="1" maxlength="24" value="CLAREIRA" required /></div>
+                </div>
+                <p id="join-error" class="form-error" role="alert" hidden></p>
+                <button id="join-button" class="primary-button" type="submit"><span>Entrar na trilha</span><svg class="icon"><use href="#i-arrow" /></svg></button>
+                <p class="welcome-footnote"><span class="small-dot"></span> Jogue sozinho ou chame sua turma.</p>
+              </form>
+              <div class="welcome-sticker" aria-hidden="true"><svg class="icon"><use href="#i-cheese" /></svg><span>O caminho é<br /><strong>parte da diversão.</strong></span></div>
+            </div>
+
+            <aside id="players-panel" class="players-panel" aria-label="Jogadores na sala" hidden>
+              <div class="players-heading"><span><svg class="icon"><use href="#i-users" /></svg> NA CLAREIRA</span><span id="player-count">0</span></div>
+              <ol id="players-list" class="players-list"></ol>
+              <button id="invite-button" class="invite-button" type="button"><svg class="icon"><use href="#i-copy" /></svg> Copiar nome da sala</button>
+            </aside>
+
+            <div id="objective-banner" class="objective-banner" hidden><svg class="icon"><use href="#i-cheese" /></svg><span id="objective-label">Pegue o queijo e volte à toca.</span></div>
+            <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+            <div id="touch-controls" class="touch-controls" aria-label="Controles por toque">
+              <div class="touch-movement"><button type="button" data-control="left" aria-label="Andar para a esquerda"><svg class="icon reverse"><use href="#i-arrow" /></svg></button><button type="button" data-control="right" aria-label="Andar para a direita"><svg class="icon"><use href="#i-arrow" /></svg></button></div>
+              <button type="button" data-control="jump" class="touch-jump" aria-label="Pular"><svg class="icon"><use href="#i-up" /></svg><span>PULAR</span></button>
+            </div>
+          </div>
+
+          <div class="game-footer">
+            <div class="controls-guide"><span class="mini-label">COMO JOGAR</span><span><kbd>A</kbd><kbd>D</kbd> ou <kbd>←</kbd><kbd>→</kbd><span class="control-description">mover</span></span><span class="jump-guide"><kbd class="space-key">Espaço</kbd><span class="control-description">pular</span></span></div>
+            <button id="reset-button" class="text-button" type="button" disabled><svg class="icon"><use href="#i-reset" /></svg> Recomeçar <kbd>R</kbd></button>
+          </div>
+        </section>
+
+        <footer class="page-footer"><p><span class="small-dot"></span> Abra duas janelas e use a mesma sala para jogar junto.</p><span>Um mundo original, feito para explorar.</span></footer>
+      </main>
+    </div>
+  </body>
+</html>

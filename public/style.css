@@ -1,0 +1,303 @@
+:root {
+  color-scheme: light;
+  --paper: #f5f2e9;
+  --ink: #294c42;
+  --muted: #788176;
+  --forest: #367361;
+  --forest-dark: #285747;
+  --orange: #df865c;
+  --line: #e0e2d4;
+  font-family: "Segoe UI", "Trebuchet MS", Arial, sans-serif;
+  font-synthesis: none;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); color: var(--ink); }
+body::before { content: ""; position: fixed; inset: 0; z-index: -1; background-image: radial-gradient(#436f4715 .65px, transparent .65px); background-size: 7px 7px; opacity: .3; pointer-events: none; }
+button, input { font: inherit; }
+button { cursor: pointer; -webkit-tap-highlight-color: transparent; }
+button:disabled { cursor: default; opacity: .45; }
+button, a, input { outline-offset: 4px; }
+button:focus-visible, a:focus-visible, canvas:focus-visible { outline: 3px solid #df865c; }
+input:focus-visible { outline: none; border-color: var(--forest); box-shadow: 0 0 0 3px #36736119; }
+[hidden] { display: none !important; }
+.icon-library { position: absolute; width: 0; height: 0; overflow: hidden; }
+.icon { display: inline-block; width: 21px; height: 21px; flex-shrink: 0; vertical-align: middle; }
+.page-shell { max-width: 1340px; margin: 0 auto; padding: 0 48px; }
+.site-header { height: 95px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--line); }
+.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--ink); }
+.brand-mark { width: 49px; height: 49px; display: block; }
+.brand-mark svg { width: 100%; height: 100%; }
+.brand-wordmark { font-family: Georgia, "Times New Roman", serif; font-weight: bold; font-size: 27px; letter-spacing: -1px; line-height: 1; }
+.brand-wordmark > span:not(.brand-tagline) { font-style: italic; color: #8d9c77; font-size: 25px; }
+.brand-tagline { display: block; font-family: "Segoe UI", Arial, sans-serif; font-size: 8px; font-weight: 700; letter-spacing: 2px; color: #788176; margin-top: 9px; }
+.header-right { display: flex; align-items: center; gap: 23px; }
+.prototype-badge { display: inline-flex; align-items: center; gap: 7px; font-size: 9px; font-weight: 700; letter-spacing: 1.5px; color: #8b8063; padding: 8px 12px; border: 1px solid #e3dec9; border-radius: 100px; background: #f1eddf; }
+.prototype-badge > span { width: 5px; height: 5px; background: #bc9d63; border-radius: 50%; }
+.icon-button { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: transparent; border: 1px solid var(--line); color: #697e6e; transition: background .15s, color .15s; }
+.icon-button:hover { background: #e8ecdf; color: var(--forest); }
+.icon-button .icon { width: 17px; height: 17px; }
+.intro { padding: 29px 0 25px; display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; }
+.eyebrow { font-size: 9px; font-weight: 700; letter-spacing: 1.8px; margin: 0 0 11px; color: #849177; display: flex; align-items: center; gap: 6px; }
+.eyebrow .icon { width: 13px; height: 13px; }
+h1 { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(24px, 2.8vw, 36px); line-height: 1.15; font-weight: normal; letter-spacing: -1px; }
+h1 em { font-weight: normal; color: #ca815f; }
+.intro-note { margin: 0 0 2px; font-size: 11px; line-height: 1.7; color: #8a8e7e; border-left: 1px solid #d8dcce; padding-left: 20px; }
+.game-frame { background: #fffdf6; border: 1px solid #dbdfd0; border-radius: 15px; overflow: hidden; box-shadow: 0 6px 9px #324d3510, 0 24px 50px #324d3508; }
+.game-toolbar { height: 61px; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 0 22px; }
+.room-summary, .round-summary { display: flex; align-items: center; gap: 13px; }
+.room-icon { background: #edf0e5; color: #7f9475; width: 33px; height: 33px; display: grid; place-items: center; border-radius: 9px; }
+.room-icon .icon { width: 17px; height: 17px; }
+.mini-label { font-size: 8px; letter-spacing: 1.5px; font-weight: 700; color: #8b967e; display: block; }
+.room-button { display: flex; align-items: center; justify-content: space-between; gap: 13px; color: #405a46; border: 0; background: none; padding: 4px 0 0; font-size: 11px; font-weight: 750; letter-spacing: 1px; }
+.room-button > span { color: #90a083; font-size: 14px; line-height: 1; font-weight: normal; }
+.room-button:hover { color: #bc7753; }
+.toolbar-divider { height: 22px; width: 1px; background: #e7e9dd; margin: 0 4px; }
+.connection-status { display: flex; align-items: center; gap: 6px; font-size: 10px; color: #8c957e; white-space: nowrap; }
+.status-dot, .small-dot { display: inline-block; border-radius: 50%; width: 5px; height: 5px; background: #95a17d; flex-shrink: 0; }
+.connection-status[data-status="connected"] { color: #67816c; }
+.connection-status[data-status="connected"] .status-dot { background: #69a376; box-shadow: 0 0 0 3px #69a37617; }
+.connection-status[data-status="connecting"] .status-dot { background: #d7a560; animation: pulse 1.4s ease infinite; }
+.connection-status[data-status="offline"] { color: #b87557; }
+.connection-status[data-status="offline"] .status-dot { background: #cf8768; }
+.round-summary { gap: 12px; color: #697c60; font-size: 10px; }
+.cheese-status { display: flex; align-items: center; gap: 7px; }
+.cheese-status .icon { width: 18px; height: 18px; color: #d6aa59; --icon-detail: #fffdf6; }
+.timer { display: flex; align-items: center; gap: 6px; font-weight: 700; font-size: 12px; font-variant-numeric: tabular-nums; color: #63745a; min-width: 56px; }
+.timer .icon { width: 15px; height: 15px; }
+.timer.is-urgent { color: #bf7156; }
+.game-viewport { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: #f5d8b8; }
+#game { display: block; width: 100%; height: 100%; outline-offset: -4px; touch-action: none; }
+.world-caption { position: absolute; left: 25px; bottom: 19px; display: flex; align-items: center; gap: 7px; font-size: 8px; font-weight: 700; letter-spacing: 2px; color: #fff7df; text-shadow: 0 1px 2px #37594830; pointer-events: none; }
+.world-caption > span { width: 17px; height: 1px; background: #fff7df; opacity: .7; }
+.welcome-layer { position: absolute; inset: 0; display: flex; align-items: center; padding: 28px 6%; background: linear-gradient(90deg, #5d695907, transparent 70%); }
+.welcome-card { position: relative; width: 341px; border-radius: 18px; padding: 30px 29px 23px; background: #fffdf7f5; box-shadow: 0 15px 40px #74684a24, 0 1px 0 #ffffffa0 inset; border: 1px solid #ffffffe0; }
+.welcome-leaf { display: grid; place-items: center; width: 42px; height: 42px; position: absolute; top: -21px; right: 22px; background: #e8edda; border: 4px solid #fffdf7; color: #93a67a; border-radius: 50%; transform: rotate(-15deg); }
+.welcome-leaf .icon { width: 21px; height: 21px; }
+.welcome-card .eyebrow { font-size: 8px; letter-spacing: 1.4px; margin-bottom: 10px; color: #8f9b80; }
+h2 { font-family: Georgia, "Times New Roman", serif; font-size: 35px; font-weight: normal; line-height: 1; margin: 0 0 13px; letter-spacing: -1px; }
+.welcome-description { font-size: 11px; line-height: 1.7; color: #85907b; margin: 0 0 24px; }
+.welcome-card label { display: block; font-size: 10px; font-weight: 600; margin-bottom: 8px; color: #627559; }
+.welcome-card input { width: 100%; color: var(--ink); background: #f9f9f1; border: 1px solid #e1e6d7; border-radius: 7px; height: 42px; font-size: 12px; padding: 0 12px; transition: border-color .15s, box-shadow .15s; }
+.welcome-card input::placeholder { color: #b0b69d; }
+.room-field { margin-top: 17px; position: relative; }
+.field-note { position: absolute; top: 1px; right: 0; color: #a3a68f; font-size: 8px; }
+.input-with-icon { position: relative; }
+.input-with-icon .icon { position: absolute; top: 12px; left: 12px; width: 16px; height: 16px; color: #9faa8c; }
+.input-with-icon input { padding-left: 37px; letter-spacing: 1.1px; font-size: 10px; font-weight: 600; }
+.primary-button { width: 100%; display: flex; justify-content: center; align-items: center; gap: 38px; height: 45px; border-radius: 8px; border: 1px solid #285948; background: var(--forest); color: #fffdf2; font-weight: 600; font-size: 12px; margin-top: 20px; box-shadow: 0 3px 0 #2b5c4d; transition: background .15s, transform .15s, box-shadow .15s; }
+.primary-button .icon { width: 17px; height: 17px; }
+.primary-button:hover:not(:disabled) { background: var(--forest-dark); transform: translateY(-1px); box-shadow: 0 4px 0 #254d40; }
+.primary-button:active:not(:disabled) { transform: translateY(2px); box-shadow: 0 1px 0 #254d40; }
+.welcome-footnote { display: flex; justify-content: center; align-items: center; gap: 6px; font-size: 8px; color: #95a185; margin: 18px 0 0; }
+.welcome-footnote .small-dot { width: 4px; height: 4px; }
+.form-error { font-size: 10px; color: #b66043; line-height: 1.4; margin: 11px 0 -5px; }
+.welcome-sticker { position: absolute; top: 10%; right: 8%; display: flex; align-items: center; gap: 12px; color: #896d42; padding: 14px 17px; border-radius: 12px; background: #fff6d3bd; border: 1px solid #fff9e4bb; transform: rotate(3deg); box-shadow: 0 4px 10px #9c80441c; pointer-events: none; }
+.welcome-sticker .icon { width: 29px; height: 29px; color: #dbab54; --icon-detail: #fff6d3; }
+.welcome-sticker span { font-family: Georgia, "Times New Roman", serif; font-size: 13px; line-height: 1.45; }
+.welcome-sticker strong { font-weight: normal; font-style: italic; }
+.players-panel { position: absolute; top: 18px; right: 18px; width: 171px; padding: 12px 13px 0; border-radius: 12px; border: 1px solid #ffffffaa; background: #fffdf0e3; box-shadow: 0 5px 15px #5e755b13; }
+.players-heading { display: flex; align-items: center; justify-content: space-between; padding-bottom: 8px; border-bottom: 1px solid #e4e7d4; font-size: 8px; font-weight: 700; letter-spacing: 1px; color: #839075; }
+.players-heading > span:first-child { display: flex; align-items: center; gap: 5px; }
+.players-heading .icon { width: 13px; height: 13px; }
+#player-count { background: #e9edda; border-radius: 4px; color: #687c5d; min-width: 19px; text-align: center; padding: 2px; font-size: 9px; }
+.players-list { list-style: none; margin: 5px 0; padding: 0; max-height: 172px; overflow-y: auto; scrollbar-width: thin; }
+.players-list li { display: flex; align-items: center; gap: 7px; min-height: 30px; font-size: 9px; color: #6e7c61; }
+.player-dot { width: 16px; height: 16px; border: 3px solid #fffef5; box-shadow: 0 0 0 1px #dce2d0; border-radius: 50%; flex-shrink: 0; }
+.player-list-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; }
+.player-list-score { font-size: 9px; font-weight: 700; color: #809168; min-width: 13px; text-align: right; }
+.player-list-local { font-weight: 600; }
+.invite-button { color: #8a977b; background: none; border: none; border-top: 1px solid #e4e7d4; width: 100%; padding: 9px 0 11px; font-size: 8px; display: flex; gap: 6px; align-items: center; justify-content: center; }
+.invite-button .icon { width: 11px; height: 11px; }
+.invite-button:hover { color: #416e50; }
+.objective-banner { position: absolute; top: 18px; left: 21px; display: flex; align-items: center; gap: 8px; padding: 9px 12px; background: #fffaf1de; color: #718068; border-radius: 8px; font-size: 10px; border: 1px solid #ffffff99; pointer-events: none; }
+.objective-banner .icon { color: #d3a44d; --icon-detail: #fffaf1; width: 16px; height: 16px; }
+.objective-banner.is-finished { color: #517954; background: #f0f6ddea; }
+.toast { position: absolute; bottom: 57px; left: 50%; transform: translateX(-50%); max-width: 90%; width: max-content; background: #fffdf1f5; border: 1px solid #faffeb; color: #517057; padding: 12px 19px; border-radius: 10px; font-size: 11px; box-shadow: 0 5px 20px #3c574d24; text-align: center; line-height: 1.5; animation: toast-in .2s ease both; pointer-events: none; }
+.game-footer { display: flex; align-items: center; justify-content: space-between; gap: 15px; padding: 13px 23px; min-height: 55px; }
+.controls-guide { display: flex; align-items: center; gap: 22px; }
+.controls-guide > span:not(.mini-label) { display: flex; align-items: center; gap: 4px; font-size: 9px; color: #9ba18c; }
+kbd { display: inline-flex; min-width: 22px; height: 22px; padding: 0 4px; align-items: center; justify-content: center; border: 1px solid #dce2d2; border-bottom-width: 2px; background: #f4f6ed; border-radius: 4px; color: #7c8d70; font-family: inherit; font-size: 9px; line-height: 1; }
+.controls-guide .space-key { padding: 0 9px; }
+.control-description { padding-left: 5px; font-size: 10px; }
+.text-button { background: none; color: #809070; padding: 4px 0; border: 0; font-size: 10px; display: flex; align-items: center; gap: 7px; }
+.text-button .icon { width: 14px; height: 14px; }
+.text-button kbd { margin-left: 6px; }
+.text-button:hover:not(:disabled) { color: var(--forest); }
+.page-footer { display: flex; align-items: center; justify-content: space-between; gap: 20px; color: #98a08b; padding: 17px 2px 25px; font-size: 9px; }
+.page-footer p { margin: 0; display: flex; align-items: center; gap: 7px; }
+.page-footer .small-dot { width: 4px; height: 4px; }
+.page-footer > span { font-family: Georgia, "Times New Roman", serif; font-style: italic; font-size: 11px; color: #96a083; }
+.touch-controls { display: none; position: absolute; bottom: 35px; left: 17px; right: 17px; justify-content: space-between; pointer-events: none; }
+.touch-controls button { touch-action: none; user-select: none; pointer-events: auto; display: grid; place-items: center; width: 52px; height: 48px; border: 1px solid #fffef3a6; color: #44644b; background: #fffbeece; border-radius: 12px; box-shadow: 0 3px 0 #405a3430; }
+.touch-controls button:active, .touch-controls button.is-pressed { background: #c2d4af; transform: translateY(2px); box-shadow: none; }
+.touch-controls .reverse { transform: rotate(180deg); }
+.touch-movement { display: flex; gap: 9px; }
+.touch-controls .touch-jump { width: 64px; height: 56px; font-size: 7px; font-weight: 700; letter-spacing: .7px; gap: 0; padding: 7px 0; }
+.touch-jump .icon { width: 19px; height: 19px; }
+.welcome-layer:not([hidden]) ~ .touch-controls { display: none; }
+@keyframes pulse { 50% { opacity: .35; } }
+@keyframes toast-in { from { opacity: 0; transform: translate(-50%, 5px); } to { opacity: 1; transform: translate(-50%, 0); } }
+
+@media (min-width: 1450px) {
+  .page-shell { max-width: 1440px; }
+  .intro { padding: 33px 0 29px; }
+}
+@media (max-width: 1050px) {
+  .page-shell { padding: 0 26px; }
+  .site-header { height: 79px; }
+  .intro { padding: 23px 0; }
+  .welcome-card { width: 302px; padding: 24px; }
+  .welcome-card h2 { font-size: 31px; }
+  .welcome-description { margin-bottom: 16px; }
+  .welcome-card input { height: 37px; }
+  .input-with-icon .icon { top: 10px; }
+  .room-field { margin-top: 13px; }
+  .welcome-card .primary-button { height: 40px; margin-top: 15px; }
+  .welcome-footnote { margin-top: 14px; }
+  .welcome-sticker { right: 6%; padding: 12px; }
+  .welcome-sticker span { font-size: 11px; }
+  .welcome-sticker .icon { width: 24px; height: 24px; }
+  .connection-status { font-size: 9px; }
+}
+@media (max-width: 800px) {
+  .page-shell { padding: 0 18px; }
+  .intro-note { display: none; }
+  .game-toolbar { padding: 0 15px; height: 55px; }
+  .connection-status { font-size: 0; gap: 0; }
+  .connection-status .status-dot { width: 6px; height: 6px; }
+  .room-summary { gap: 9px; }
+  .room-summary .toolbar-divider { display: none; }
+  .cheese-status { font-size: 9px; }
+  .round-summary { gap: 6px; }
+  .welcome-layer { padding: 14px 5%; }
+  .welcome-card { padding: 20px 22px 16px; width: 278px; }
+  .welcome-card .eyebrow { font-size: 7px; margin-bottom: 8px; }
+  .welcome-card h2 { font-size: 28px; margin-bottom: 8px; }
+  .welcome-description { font-size: 10px; line-height: 1.5; margin-bottom: 13px; }
+  .welcome-card label { font-size: 9px; margin-bottom: 5px; }
+  .welcome-card input { height: 33px; font-size: 11px; }
+  .input-with-icon input { font-size: 9px; }
+  .input-with-icon .icon { top: 8px; }
+  .room-field { margin-top: 10px; }
+  .welcome-card .primary-button { height: 35px; font-size: 11px; margin-top: 12px; }
+  .welcome-footnote { font-size: 7px; margin-top: 11px; }
+  .field-note { font-size: 7px; }
+  .welcome-sticker { top: 11%; right: 5%; }
+  .welcome-leaf { width: 36px; height: 36px; top: -17px; }
+  .game-footer { padding: 11px 16px; }
+  .controls-guide { gap: 12px; }
+  .controls-guide > .mini-label { display: none; }
+  .page-footer > span { display: none; }
+  .players-panel { top: 12px; right: 12px; width: 145px; }
+  .objective-banner { top: 12px; left: 12px; font-size: 9px; padding: 7px 9px; }
+}
+@media (max-width: 640px) {
+  .page-shell { padding: 0 12px; }
+  .site-header { height: 74px; }
+  .brand { gap: 6px; }
+  .brand-mark { width: 41px; height: 41px; }
+  .brand-wordmark { font-size: 23px; }
+  .brand-wordmark > span:not(.brand-tagline) { font-size: 21px; }
+  .brand-tagline { font-size: 6px; letter-spacing: 1.2px; margin-top: 7px; }
+  .header-right { gap: 10px; }
+  .prototype-badge { font-size: 7px; letter-spacing: .7px; padding: 7px 8px; }
+  .icon-button { width: 31px; height: 31px; }
+  .intro { padding: 20px 2px 18px; }
+  .intro .eyebrow { font-size: 7px; letter-spacing: 1.4px; margin-bottom: 9px; }
+  h1 { font-size: 25px; line-height: 1.2; max-width: 280px; }
+  .game-frame { border-radius: 12px; }
+  .game-toolbar { padding: 0 11px; height: 52px; gap: 5px; }
+  .mini-label { font-size: 7px; letter-spacing: 1.1px; }
+  .room-button { font-size: 9px; gap: 5px; }
+  .room-icon { width: 28px; height: 28px; border-radius: 7px; }
+  .round-summary .toolbar-divider { margin: 0 2px; }
+  .cheese-status > span { display: none; }
+  .timer { font-size: 11px; min-width: 52px; }
+  .game-viewport { aspect-ratio: auto; height: min(72vh, 560px); min-height: 440px; display: flex; align-items: center; background: #edd5af; }
+  #game { width: 100%; height: auto; aspect-ratio: 16 / 9; }
+  .game-viewport::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(#b8c5a28c, transparent 28%, transparent 72%, #8da68a77); }
+  .welcome-layer { padding: 26px 20px; justify-content: center; }
+  .welcome-card { width: 100%; max-width: 330px; padding: 27px 25px 23px; }
+  .welcome-card .eyebrow { font-size: 8px; }
+  .welcome-card h2 { font-size: 33px; margin-bottom: 12px; }
+  .welcome-description { font-size: 11px; margin-bottom: 19px; line-height: 1.7; }
+  .welcome-card input { height: 39px; font-size: 12px; }
+  .welcome-card label { font-size: 10px; margin-bottom: 7px; }
+  .room-field { margin-top: 15px; }
+  .field-note { font-size: 8px; }
+  .input-with-icon .icon { top: 11px; }
+  .input-with-icon input { font-size: 10px; }
+  .welcome-card .primary-button { margin-top: 19px; height: 43px; font-size: 12px; }
+  .welcome-footnote { margin-top: 17px; font-size: 8px; }
+  .welcome-sticker { display: none; }
+  .welcome-leaf { width: 43px; height: 43px; top: -21px; }
+  .players-panel { width: 141px; top: 58px; right: 12px; padding: 9px 11px 0; }
+  .players-list { max-height: 68px; }
+  .players-list li { min-height: 27px; }
+  .objective-banner { left: 12px; right: 12px; top: 14px; font-size: 10px; justify-content: center; padding: 9px 10px; }
+  .world-caption { bottom: 13px; left: 16px; font-size: 7px; }
+  .toast { bottom: 108px; font-size: 10px; padding: 10px 13px; }
+  .game-footer { padding: 12px; min-height: 51px; }
+  .controls-guide { gap: 11px; }
+  .controls-guide > span { font-size: 8px; }
+  .controls-guide .control-description { display: none; }
+  .controls-guide kbd { min-width: 19px; height: 21px; font-size: 8px; }
+  .controls-guide .space-key { padding: 0 5px; }
+  .text-button { font-size: 9px; gap: 5px; }
+  .text-button kbd { display: none; }
+  .page-footer { padding: 15px 3px 23px; font-size: 8px; line-height: 1.5; }
+  .touch-controls { display: flex; }
+}
+@media (hover: none) and (pointer: coarse) {
+  .touch-controls { display: flex; }
+}
+/* Keep the complete trail and its controls visible in the desktop window.
+   Constrain the page width from the available height, preserving Canvas 16:9. */
+@media (min-width: 801px) and (max-height: 980px) {
+  .page-shell { max-width: min(1180px, calc(177.7778vh - 509.3334px)); padding: 0 28px; }
+  .site-header { height: 72px; }
+  .intro { padding: 16px 0 18px; }
+  .intro .eyebrow { margin-bottom: 8px; }
+  h1 { font-size: 30px; }
+  .game-toolbar { height: 55px; }
+  .game-footer { min-height: 49px; padding: 11px 20px; }
+  .page-footer { padding: 12px 2px 17px; }
+}
+@media (min-width: 801px) and (max-height: 740px) {
+  .page-shell { max-width: min(1050px, calc(177.7778vh - 420.4445px)); }
+  .site-header { height: 60px; }
+  .intro { padding: 12px 0; }
+  .intro .eyebrow { margin-bottom: 6px; font-size: 8px; }
+  h1 { font-size: 26px; }
+  .intro-note { display: none; }
+  .game-toolbar { height: 49px; padding: 0 14px; }
+  .connection-status { font-size: 0; gap: 0; }
+  .room-summary .toolbar-divider { display: none; }
+  .game-footer { min-height: 43px; padding: 8px 14px; }
+  .controls-guide { gap: 12px; }
+  .controls-guide > .mini-label { display: none; }
+  .page-footer { padding: 8px 2px 10px; }
+  .page-footer > span { display: none; }
+  .welcome-layer { padding: 12px 5%; }
+  .welcome-card { width: 286px; padding: 18px 22px; }
+  .welcome-card .eyebrow { font-size: 7px; margin-bottom: 8px; }
+  .welcome-card h2 { font-size: 28px; margin-bottom: 8px; }
+  .welcome-description { font-size: 10px; line-height: 1.5; margin-bottom: 13px; }
+  .welcome-card label { font-size: 9px; margin-bottom: 5px; }
+  .welcome-card input { height: 33px; font-size: 11px; }
+  .input-with-icon input { font-size: 9px; }
+  .input-with-icon .icon { top: 8px; }
+  .room-field { margin-top: 10px; }
+  .welcome-card .primary-button { height: 35px; font-size: 11px; margin-top: 12px; }
+  .welcome-footnote { font-size: 7px; margin-top: 11px; }
+  .field-note { font-size: 7px; }
+  .welcome-leaf { top: 12px; right: 16px; width: 30px; height: 30px; border-width: 3px; }
+  .welcome-leaf .icon { width: 15px; height: 15px; }
+  .welcome-sticker { top: 8%; right: 5%; padding: 10px; }
+  .welcome-sticker span { font-size: 10px; }
+  .welcome-sticker .icon { width: 21px; height: 21px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}

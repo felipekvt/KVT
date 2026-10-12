@@ -1,0 +1,15 @@
+{
+  "name": "toca-e-trilha",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Protótipo original de plataforma 2D cooperativa, com servidor autoritativo próprio.",
+  "type": "module",
+  "main": "desktop/main.cjs",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test tests/*.test.mjs",
+    "package:windows": "python3 scripts/package_windows.py"
+  },
+  "engines": { "node": ">=22.12.0" },
+  "dependencies": { "ws": "8.21.0" }
+}
